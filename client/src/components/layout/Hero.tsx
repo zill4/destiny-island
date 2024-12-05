@@ -1,11 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Hero() {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
     console.log('Get started clicked');
-    navigate('/sign-up');
+    navigate('/register');
   };
 
   const handleHowItWorks = (e: React.MouseEvent) => {

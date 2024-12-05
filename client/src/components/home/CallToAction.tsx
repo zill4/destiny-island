@@ -4,7 +4,7 @@ export default function CallToAction() {
     const navigate = useNavigate();
 
     const handleSignUp = () => {
-        navigate('/sign-up');
+        navigate('/register');
     }
 
     return (
