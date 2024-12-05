@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Create from './pages/dashboard/Create';
+import Scripts from './pages/dashboard/Scripts';
+import Scenes from './pages/dashboard/Scenes';
 // import Layout from './components/layout/Layout ';
 
 function App() {
@@ -16,13 +19,18 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-              }
-            />
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Create />} />
+          <Route path="create" element={<Create />} />
+          <Route path="scripts" element={<Scripts />} />
+          <Route path="scenes" element={<Scenes />} />
+        </Route>
         </Routes>
       </BrowserRouter>        
     </AuthProvider>

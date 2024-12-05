@@ -1,83 +1,55 @@
-import { Link } from 'react-router-dom';
-import Layout from '../components/layout/Layout';
+import { Link, Outlet } from 'react-router-dom';
+import { BellIcon, HomeIcon, SparklesIcon, BookOpenIcon, CogIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
   return (
-    <Layout>
-    <div className="flex h-screen bg-gray-50">
-      {/* Sidebar */}
-      <div className="w-64 bg-white border-r">
-        <div className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Tools</h2>
-          <nav className="space-y-1">
-            <Link to="/manage-scenes" className="block p-3 rounded-md bg-gray-100 hover:bg-gray-200">
-              Manage Scenes
-            </Link>
-            <Link to="/people" className="block p-3 rounded-md hover:bg-gray-100">
-              People
-            </Link>
-            <Link to="/places" className="block p-3 rounded-md hover:bg-gray-100">
-              Places
-            </Link>
-            <Link to="/things" className="block p-3 rounded-md hover:bg-gray-100">
-              Things
-            </Link>
-          </nav>
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Left Sidebar */}
+      <div className="w-16 bg-white border-r flex flex-col items-center py-6 space-y-8">
+        {/* Logo */}
+        <div className="w-8 h-8">
+          <img src="/logo.png" alt="Logo" className="w-full h-full" />
+        </div>
+
+        {/* Create Button */}
+        <Link 
+          to="/dashboard/create" 
+          className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 hover:bg-red-200"
+        >
+          <span className="text-2xl">+</span>
+        </Link>
+
+        {/* Navigation Icons */}
+        <nav className="flex flex-col space-y-6">
+          <Link to="/dashboard" className="p-2 hover:bg-gray-100 rounded-lg">
+            <BellIcon className="w-6 h-6 text-gray-600" />
+          </Link>
+          <Link to="/dashboard/home" className="p-2 hover:bg-gray-100 rounded-lg">
+            <HomeIcon className="w-6 h-6 text-gray-600" />
+          </Link>
+          <Link to="/dashboard/scripts" className="p-2 hover:bg-gray-100 rounded-lg">
+            <SparklesIcon className="w-6 h-6 text-gray-600" />
+          </Link>
+          <Link to="/dashboard/learning" className="p-2 hover:bg-gray-100 rounded-lg">
+            <BookOpenIcon className="w-6 h-6 text-gray-600" />
+          </Link>
+        </nav>
+
+        {/* Bottom Icons */}
+        <div className="mt-auto flex flex-col space-y-6">
+          <Link to="/dashboard/settings" className="p-2 hover:bg-gray-100 rounded-lg">
+            <CogIcon className="w-6 h-6 text-gray-600" />
+          </Link>
+          <button className="p-2 hover:bg-gray-100 rounded-lg">
+            <ArrowRightOnRectangleIcon className="w-6 h-6 text-gray-600" />
+          </button>
         </div>
       </div>
 
-      {/* Main content */}
-      <div className="flex-1 overflow-auto">
-        <div className="p-8">
-          <h1 className="text-2xl font-bold mb-6">Storyboard Viewer</h1>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Scene Cards */}
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img 
-                src="/path-to-scene1-image.jpg" 
-                alt="Scene 1" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold mb-2">Scene 1: The Beginning</h3>
-                <button className="px-4 py-2 bg-pink-200 rounded hover:bg-pink-300">
-                  View Details
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img 
-                src="/path-to-scene2-image.jpg" 
-                alt="Scene 2" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold mb-2">Scene 2: City Life</h3>
-                <button className="px-4 py-2 bg-pink-200 rounded hover:bg-pink-300">
-                  View Details
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <img 
-                src="/path-to-scene3-image.jpg" 
-                alt="Scene 3" 
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold mb-2">Scene 3: Forest Encounter</h3>
-                <button className="px-4 py-2 bg-pink-200 rounded hover:bg-pink-300">
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Main Content */}
+      <div className="flex-1 p-8">
+        <Outlet />
       </div>
     </div>
-    </Layout>
   );
 }
