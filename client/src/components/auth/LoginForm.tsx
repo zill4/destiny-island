@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { authService } from '../../services/auth';
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -14,10 +16,10 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       const { token } = await authService.login(formData);
-      localStorage.setItem('token', token);
+      login(token);
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid credentials' + err);
+      setError('Invalid credentials: ' + err);
     }
   };
 

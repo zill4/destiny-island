@@ -9,7 +9,6 @@ Given a script, or any story, Destiny Island will identify the Noun's create a r
 Then, using generative AI, allow users create storyboards for scenes within a give story.
 
 ## TODO
-- store login session token
 - set up secrets
 - set up env vars
 - set up deployment pipeline

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Navbar() {
-  const token = localStorage.getItem('token');
+  const { isAuthenticated, logout } = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    logout();
     window.location.href = '/';
   };
 
@@ -17,7 +18,7 @@ export default function Navbar() {
           </Link>
           
           <div className="flex space-x-4">
-            {token ? (
+            {isAuthenticated ? (
               <>
                 <Link to="/script-editor" className="px-3 py-2 rounded-md hover:bg-gray-100">
                   Script Editor
