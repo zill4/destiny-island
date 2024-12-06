@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Create from './pages/dashboard/Create';
 import Scripts from './pages/dashboard/Scripts';
 import Scenes from './pages/dashboard/Scenes';
+import CreateStory from './pages/dashboard/createStory';
 // import Layout from './components/layout/Layout ';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="create" element={<Create />} />
           <Route path="scripts" element={<Scripts />} />
           <Route path="scenes" element={<Scenes />} />
+          <Route path="createStory" element={<CreateStory />} />s
         </Route>
         </Routes>
       </BrowserRouter>        
