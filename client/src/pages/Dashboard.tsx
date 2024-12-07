@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-import { BellIcon, HomeIcon, SparklesIcon, BookOpenIcon, CogIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, SparklesIcon, BookOpenIcon, CogIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
   return (
@@ -22,9 +22,6 @@ export default function Dashboard() {
         {/* Navigation Icons */}
         <nav className="flex flex-col space-y-6">
           <Link to="/dashboard" className="p-2 hover:bg-gray-100 rounded-lg">
-            <BellIcon className="w-6 h-6 text-gray-600" />
-          </Link>
-          <Link to="/dashboard/home" className="p-2 hover:bg-gray-100 rounded-lg">
             <HomeIcon className="w-6 h-6 text-gray-600" />
           </Link>
           <Link to="/dashboard/scripts" className="p-2 hover:bg-gray-100 rounded-lg">

@@ -20,14 +20,8 @@ export default function Navbar() {
           <div className="flex space-x-4">
             {isAuthenticated ? (
               <>
-                <Link to="/script-editor" className="px-3 py-2 rounded-md hover:bg-gray-100">
-                  Script Editor
-                </Link>
-                <Link to="/scene-management" className="px-3 py-2 rounded-md bg-pink-200 hover:bg-pink-300">
-                  Scene Management
-                </Link>
-                <Link to="/storyboard" className="px-3 py-2 rounded-md hover:bg-gray-100">
-                  Storyboard Viewer
+                <Link to="/dashboard" className="px-3 py-2 rounded-md bg-pink-200 hover:bg-pink-300">
+                  Dashboard
                 </Link>
                 <button
                   onClick={handleLogout}
