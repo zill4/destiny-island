@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+import CharacterGrid from '../../components/CharacterGrid';
+import LocationGrid from '../../components/LocationGrid';
 
 interface Scene {
   id: string;
@@ -117,10 +119,15 @@ export default function StoryDetail() {
           
           <Tab.Panel>
             {/* Characters content */}
+            <div className="space-y-6">
+            {/* Search and filters could go here */}
+              <CharacterGrid />
+            </div>
           </Tab.Panel>
           
           <Tab.Panel>
             {/* Locations content */}
+            <LocationGrid />
           </Tab.Panel>
           
           <Tab.Panel>

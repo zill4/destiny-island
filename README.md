@@ -16,6 +16,7 @@ Then, using generative AI, allow users create storyboards for scenes within a gi
 - add endpoints for... stories, scenes, storyboards - Nouns
 - set up relational map of Nouns
 - set up storyboard generation with generative Images
+- !! Analytics (where people are clicking, etc.)
 ...
 
 Running the app
