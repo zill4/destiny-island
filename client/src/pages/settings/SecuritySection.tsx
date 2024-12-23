@@ -26,7 +26,7 @@ interface SecuritySectionProps {
                 className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />
               {errors.currentPassword && (
-                <p className="mt-2 text-sm text-red-600">{errors.currentPassword}</p>
+                <p className="mt-2 text-sm text-teal-600">{errors.currentPassword}</p>
               )}
             </div>
           </div>
@@ -44,7 +44,7 @@ interface SecuritySectionProps {
                 className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />
               {errors.newPassword && (
-                <p className="mt-2 text-sm text-red-600">{errors.newPassword}</p>
+                <p className="mt-2 text-sm text-teal-600">{errors.newPassword}</p>
               )}
             </div>
           </div>
@@ -62,14 +62,14 @@ interface SecuritySectionProps {
                 className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               />
               {errors.confirmPassword && (
-                <p className="mt-2 text-sm text-red-600">{errors.confirmPassword}</p>
+                <p className="mt-2 text-sm text-teal-600">{errors.confirmPassword}</p>
               )}
             </div>
           </div>
         </div>
   
         <div className="border-t border-gray-900/10 pt-8">
-          <h2 className="text-base font-semibold text-red-600">Danger Zone</h2>
+          <h2 className="text-base font-semibold text-teal-600">Danger Zone</h2>
           <p className="mt-1 text-sm text-gray-600">
             Once you delete your account, there is no going back. Please be certain.
           </p>
@@ -77,7 +77,7 @@ interface SecuritySectionProps {
             <button
               type="button"
               onClick={onDeleteAccount}
-              className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500"
+              className="rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500"
             >
               Delete Account
             </button>

@@ -38,7 +38,7 @@ export default function StoryDetail() {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-semibold">Story Manager: My First Story</h1>
-        <button className="px-4 py-2 bg-red-200 text-red-600 rounded-lg hover:bg-red-300">
+        <button className="px-4 py-2 bg-teal-200 text-teal-600 rounded-lg hover:bg-teal-300">
           Add
         </button>
       </div>
@@ -48,31 +48,31 @@ export default function StoryDetail() {
         <Tab.List className="flex space-x-8 border-b">
           <Tab className={({ selected }) =>
             `pb-4 px-2 focus:outline-none ${
-              selected ? 'border-b-2 border-red-500 text-red-500' : 'text-gray-500'
+              selected ? 'border-b-2 border-teal-500 text-teal-500' : 'text-gray-500'
             }`
           }>
             Scenes
           </Tab>
           <Tab className={({ selected }) =>
             `pb-4 px-2 focus:outline-none ${
-              selected ? 'border-b-2 border-red-500 text-red-500' : 'text-gray-500'
+              selected ? 'border-b-2 border-teal-500 text-teal-500' : 'text-gray-500'
             }`
           }>
             Characters
           </Tab>
           <Tab className={({ selected }) =>
             `pb-4 px-2 focus:outline-none ${
-              selected ? 'border-b-2 border-red-500 text-red-500' : 'text-gray-500'
+              selected ? 'border-b-2 border-teal-500 text-teal-500' : 'text-gray-500'
             }`
           }>
             Locations
           </Tab>
           <Tab className={({ selected }) =>
             `pb-4 px-2 focus:outline-none ${
-              selected ? 'border-b-2 border-red-500 text-red-500' : 'text-gray-500'
+              selected ? 'border-b-2 border-teal-500 text-teal-500' : 'text-gray-500'
             }`
           }>
-            Actions
+            Misc.
           </Tab>
         </Tab.List>
 
@@ -83,7 +83,7 @@ export default function StoryDetail() {
               <input
                 type="text"
                 placeholder="Search"
-                className="w-64 px-4 py-2 rounded-lg border bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-200"
+                className="w-64 px-4 py-2 rounded-lg border bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-200"
               />
             </div>
 
@@ -105,7 +105,7 @@ export default function StoryDetail() {
                   </div>
                   <p className="text-gray-600 text-sm">{scene.description}</p>
                   <div className="flex space-x-4 mt-4">
-                    <button onClick={() => navigate(`/dashboard/sceneStoryboard`)} className="px-4 py-2 text-sm bg-red-50 text-red-600 rounded-lg hover:bg-red-100">
+                    <button onClick={() => navigate(`/dashboard/sceneStoryboard`)} className="px-4 py-2 text-sm bg-teal-50 text-teal-600 rounded-lg hover:bg-teal-100">
                       View
                     </button>
                     <button className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">

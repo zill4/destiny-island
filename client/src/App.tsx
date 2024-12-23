@@ -11,6 +11,7 @@ import Scenes from './pages/dashboard/Scenes';
 import CreateStory from './pages/dashboard/CreateStory';
 import StoryDetails from './pages/dashboard/StoryDetails';
 import SceneStoryboard from './pages/dashboard/ScenStoryboard';
+import Settings from './pages/Settings';
 
 // import Layout from './components/layout/Layout ';
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="createStory" element={<CreateStory />} />
           <Route path="storyDetails" element={<StoryDetails />} />
           <Route path="sceneStoryboard" element={<SceneStoryboard />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
         </Routes>
       </BrowserRouter>        

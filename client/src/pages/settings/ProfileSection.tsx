@@ -26,7 +26,7 @@ export function ProfileSection({ formData, errors, onChange, onImageUpload }: Pr
             className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
           />
           {errors.username && (
-            <p className="mt-2 text-sm text-red-600">{errors.username}</p>
+            <p className="mt-2 text-sm text-teal-600">{errors.username}</p>
           )}
         </div>
       </div>

@@ -54,7 +54,7 @@ export default function RegisterForm() {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         />
       </div>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && <p className="text-teal-500 text-sm">{error}</p>}
       <button
         type="submit"
         className="w-full bg-indigo-600 text-white rounded-md py-2 hover:bg-indigo-700"

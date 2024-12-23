@@ -1,7 +1,14 @@
-import { Link, Outlet } from 'react-router-dom';
-import { HomeIcon, SparklesIcon, BookOpenIcon, CogIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { HomeIcon,  CogIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');  
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Left Sidebar */}
@@ -13,8 +20,8 @@ export default function Dashboard() {
 
         {/* Create Button */}
         <Link 
-          to="/dashboard/create" 
-          className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-600 hover:bg-red-200"
+          to="/dashboard/createStory" 
+          className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 hover:bg-teal-200"
         >
           <span className="text-2xl">+</span>
         </Link>
@@ -24,12 +31,6 @@ export default function Dashboard() {
           <Link to="/dashboard" className="p-2 hover:bg-gray-100 rounded-lg">
             <HomeIcon className="w-6 h-6 text-gray-600" />
           </Link>
-          <Link to="/dashboard/scripts" className="p-2 hover:bg-gray-100 rounded-lg">
-            <SparklesIcon className="w-6 h-6 text-gray-600" />
-          </Link>
-          <Link to="/dashboard/learning" className="p-2 hover:bg-gray-100 rounded-lg">
-            <BookOpenIcon className="w-6 h-6 text-gray-600" />
-          </Link>
         </nav>
 
         {/* Bottom Icons */}
@@ -37,7 +38,7 @@ export default function Dashboard() {
           <Link to="/dashboard/settings" className="p-2 hover:bg-gray-100 rounded-lg">
             <CogIcon className="w-6 h-6 text-gray-600" />
           </Link>
-          <button className="p-2 hover:bg-gray-100 rounded-lg">
+          <button onClick={handleLogout} className="p-2 hover:bg-gray-100 rounded-lg">
             <ArrowRightOnRectangleIcon className="w-6 h-6 text-gray-600" />
           </button>
         </div>
