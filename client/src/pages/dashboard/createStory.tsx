@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { createStory } from '../../services/storyService';
 
 interface StoryData {
   title: string;
@@ -11,6 +12,8 @@ interface StoryData {
 
 export default function CreateStory() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [storyData, setStoryData] = useState<StoryData>({
     title: '',
@@ -28,11 +31,25 @@ export default function CreateStory() {
     }));  
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement story creation logic
-    console.log('Story data:', storyData);
-    navigate(`/dashboard/storyDetails`);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await createStory({
+        ...storyData,
+        tags: [], // Add tags if needed
+      });
+
+      // Navigate to the story details page with the new story ID
+      navigate(`/dashboard/story/${response.storyId}`);
+    } catch (err) {
+      setError('Failed to create story. Please try again.');
+      console.error('Error creating story:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const characterCount = storyData.script.length;
@@ -75,7 +92,7 @@ export default function CreateStory() {
                     placeholder="Add scene tags..."
                     className="w-full p-2 border rounded"
                   />
-                </div>
+                </div>=
 
                 <div>
                   <label className="block text-sm font-medium mb-1">Description</label>
@@ -115,15 +132,19 @@ export default function CreateStory() {
 
                 <button
                   onClick={handleSubmit}
-                  className="w-full mt-6 bg-teal-300 hover:bg-teal-400 text-white py-2 px-4 rounded transition-colors"
+                  disabled={loading}
+                  className="w-full mt-6 bg-teal-300 hover:bg-teal-400 text-white py-2 px-4 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Create Story
+                  {loading ? 'Creating Story...' : 'Create Story'}
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {error && (
+        <p className="mt-2 text-sm text-red-600">{error}</p>
+      )}
     </div>
   );
 }
