@@ -2,16 +2,18 @@ interface CreateStoryPayload {
   title: string;
   description: string;
   author: string;
-  series?: string;
-  script: string;
   tags?: string[];
+  script: string;
 }
 
 export async function createStory(storyData: CreateStoryPayload) {
-  const response = await fetch('/api/stories', {
+  const token = localStorage.getItem('token');
+  // TODO: Swap out URL based on environment
+  const response = await fetch('http://localhost:3000/api/stories/submit-script', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify(storyData),
   });
@@ -21,4 +23,4 @@ export async function createStory(storyData: CreateStoryPayload) {
   }
 
   return response.json();
-} 
+}

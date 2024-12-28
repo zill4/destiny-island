@@ -2,85 +2,69 @@ import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import pool from '../config/database';
 
+interface StoryRequest {
+  title: string;
+  description: string;
+  author: string;
+  tags: string[];
+  script: string;
+}
+
+/*
+  SubmitScript function
+  This function is responsible for creating a new story in the database.
+  Params:
+  title: string - The title of the story
+  description: string - A brief description of the story
+  author: string - The author of the story
+  tags: string[] - An array of tags associated with the story
+*/
 export async function submitScript(req: Request, res: Response) {
   const connection = await pool.getConnection();
   try {
-    await connection.beginTransaction();
-
-    const { title, description, author, tags = [], script } = req.body;
+    const { title, description, author, tags = [], script } = req.body as StoryRequest;
     const userId = (req as any).user.id;
 
-    // Create story
+    if (!title || !description || !script) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    await connection.beginTransaction();
+
+    // Create story with author field
     const storyId = uuidv4();
     await connection.query(
-      'INSERT INTO stories (id, title, summary, author_id) VALUES (?, ?, ?, ?)',
-      [storyId, title, description, userId]
+      'INSERT INTO stories (id, title, summary, author_id, author_name, content) VALUES (?, ?, ?, ?, ?, ?)',
+      [storyId, title, description, userId, author, script]
     );
 
     // Handle tags
     for (const tagName of tags) {
-      // Insert tag if it doesn't exist
-      const [existingTags]: any = await connection.query(
+      // Insert tag if doesn't exist and get its ID
+      await connection.query(
         'INSERT IGNORE INTO tags (name) VALUES (?)',
         [tagName]
       );
       
-      // Get tag id
-      const [tagRows]: any = await connection.query(
-        'SELECT id FROM tags WHERE name = ?',
-        [tagName]
-      );
-      const tagId = tagRows[0].id;
-
-      // Create story-tag association
+      // Link tag to story
       await connection.query(
-        'INSERT INTO story_tags (story_id, tag_id) VALUES (?, ?)',
-        [storyId, tagId]
+        'INSERT INTO story_tags (story_id, tag_name) VALUES (?, ?)',
+        [storyId, tagName]
       );
-    }
-
-    // Here you would integrate with your AI service to analyze the script
-    // and generate chapters, scenes, storyboards, and shots
-    // This is a placeholder for the AI integration
-    const storyStructure = await generateStoryStructure(script);
-
-    // Create chapters, scenes, etc. based on AI output
-    for (const chapterData of storyStructure.chapters) {
-      const chapterId = uuidv4();
-      await connection.query(
-        'INSERT INTO chapters (id, name, story_id, sequence_number) VALUES (?, ?, ?, ?)',
-        [chapterId, chapterData.name, storyId, chapterData.sequence]
-      );
-
-      // Create scenes for each chapter
-      for (const sceneData of chapterData.scenes) {
-        const sceneId = uuidv4();
-        await connection.query(
-          'INSERT INTO scenes (id, title, location, time_of_day, chapter_id, sequence_number) VALUES (?, ?, ?, ?, ?, ?)',
-          [sceneId, sceneData.title, sceneData.location, sceneData.timeOfDay, chapterId, sceneData.sequence]
-        );
-
-        // Create storyboard for the scene
-        const storyboardId = uuidv4();
-        await connection.query(
-          'INSERT INTO storyboards (id, scene_id) VALUES (?, ?)',
-          [storyboardId, sceneId]
-        );
-
-        // Create shots for the storyboard
-        for (const shotData of sceneData.shots) {
-          await connection.query(
-            'INSERT INTO shots (id, description, duration, camera_angle, transition, storyboard_id, sequence_number) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [uuidv4(), shotData.description, shotData.duration, shotData.cameraAngle, shotData.transition, storyboardId, shotData.sequence]
-          );
-        }
-      }
     }
 
     await connection.commit();
+
     res.status(201).json({
-      message: 'Story created successfully',
-      storyId
+      success: true,
+      data: {
+        id: storyId,
+        title,
+        description,
+        author,
+        tags,
+        userId
+      }
     });
 
   } catch (error) {
@@ -121,4 +105,4 @@ async function generateStoryStructure(script: string) {
       }
     ]
   };
-} 
+}
